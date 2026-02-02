@@ -1,0 +1,14 @@
+# Ignore Maven build output
+/target/
+
+# Ignore TestNG generated reports
+/test-output/
+
+# Ignore Eclipse-specific files
+.settings/
+.project
+.classpath
+
+# Ignore OS-generated files
+Thumbs.db
+.DS_Store
