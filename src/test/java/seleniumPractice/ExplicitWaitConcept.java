@@ -36,8 +36,11 @@ public class ExplicitWaitConcept {
 	
 	
 	public static void clickOn(WebDriver driver, WebElement locator, int i) {
-		new WebDriverWait(driver, i).ignoring(StaleElementReferenceException.class).until(ExpectedConditions.elementToBeClickable(locator));
-		locator.click();
+	    // Change 'i' to 'Duration.ofSeconds(i)'
+	    new WebDriverWait(driver, Duration.ofSeconds(i))
+	        .ignoring(StaleElementReferenceException.class)
+	        .until(ExpectedConditions.elementToBeClickable(locator));
+	    locator.click();
 	}
 
 }

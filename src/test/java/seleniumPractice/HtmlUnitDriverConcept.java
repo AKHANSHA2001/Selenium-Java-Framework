@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+
 
 public class HtmlUnitDriverConcept {
 
@@ -28,7 +28,7 @@ public class HtmlUnitDriverConcept {
 			//--PhantomJS -- JavaScript
 		
 		
-		WebDriver driver = new WebDriver();
+		WebDriver driver = new ChromeDriver();
 		
 		driver.manage().window().maximize(); //maximize window
 		driver.manage().deleteAllCookies(); //delete all the cookies
