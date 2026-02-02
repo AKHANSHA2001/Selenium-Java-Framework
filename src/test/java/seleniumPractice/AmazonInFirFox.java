@@ -51,8 +51,7 @@ public class AmazonInFirFox {
 	                // Short pause to see the result before closing (for debugging)
 	                Thread.sleep(3000); 
 	            } catch (InterruptedException e) {
-	                e.printStackTrace();
-	                
+	                e.printStackTrace(); 
 	            }
 	            driver.quit();
 	            System.out.println("Test complete: Browser closed");
