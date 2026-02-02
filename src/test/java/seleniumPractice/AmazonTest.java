@@ -57,9 +57,10 @@ public class AmazonTest {
                 Thread.sleep(3000); 
             } catch (InterruptedException e) {
                 e.printStackTrace();
+                
             }
             driver.quit();
-            System.out.println("Test complete: Browser closed.");
+            System.out.println("Test complete: Browser closed");
         }
     }
 }
