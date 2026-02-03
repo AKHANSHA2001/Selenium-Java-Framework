@@ -1,10 +1,12 @@
 package seleniumPractice;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Navigations {
@@ -14,8 +16,19 @@ public class Navigations {
 
 		//get() vs navigate().to()
 		
-		System.setProperty("webdriver.chrome.driver", "/Users/naveenkhunteta/Downloads/chromedriver");	
-		WebDriver driver = new ChromeDriver(); //launch chrome
+		WebDriver driver;
+		 String projectPath = System.getProperty("user.dir");
+	        String driverPath = projectPath + File.separator + "src" + File.separator + "test" + 
+	                           File.separator + "java" + File.separator + "resources" + 
+	                           File.separator + "driver" + File.separator + "chromedriver.exe";
+
+	        System.setProperty("webdriver.chrome.driver", driverPath);
+
+	        ChromeOptions options = new ChromeOptions();
+	        options.addArguments("--start-maximized");
+	        driver = new ChromeDriver(options);
+
+		 driver = new ChromeDriver(); // launch chrome
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(40));
