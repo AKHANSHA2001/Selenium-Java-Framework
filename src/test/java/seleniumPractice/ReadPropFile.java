@@ -8,57 +8,39 @@ import java.util.Properties;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class ReadPropFile {
+    public static WebDriver driver;
 
-	
-	public static WebDriver driver;
-	
-	public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {
+        Properties prop = new Properties();
+        
+        // Use relative pathing so it works on any computer
+        String projectPath = System.getProperty("user.dir");
+        FileInputStream ip = new FileInputStream(projectPath + "/src/seleniumPractice/config.properties");
+        prop.load(ip);
 
-		Properties prop = new Properties();
+        String browserName = prop.getProperty("browser");
+        String url = prop.getProperty("URL");
 
-		FileInputStream ip = new FileInputStream(
-				"/Users/naveenkhunteta/Documents/workspace/MorningSessions/src/SeleniumSessions/config.properties");
+        // Logic to switch browsers
+        if (browserName.equalsIgnoreCase("chrome")) {
+            // Recommendation: Use WebDriverManager or ensure driverPath is correct
+            System.setProperty("webdriver.chrome.driver", projectPath + "/drivers/chromedriver.exe");
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--start-maximized");
+            driver = new ChromeDriver(options);
+        } else if (browserName.equalsIgnoreCase("FF")) {
+            driver = new FirefoxDriver();
+        }
 
-		prop.load(ip);
-
-		System.out.println(prop.getProperty("name"));
-
-		System.out.println(prop.getProperty("age"));
-
-		String url = prop.getProperty("URL");
-
-		System.out.println(url);
-
-		String browserName = prop.getProperty("browser");
-
-		System.out.println(browserName);
-
-		if (browserName.equals("chrome")) {
-			System.setProperty("webdriver.chrome.driver", "/Users/naveenkhunteta/Downloads/chromedriver");
-			driver = new ChromeDriver(); // launch chrome
-		} 
-		else if(browserName.equals("FF")){
-			System.setProperty("webdriver.chrome.driver", "/Users/naveenkhunteta/Downloads/geckodriver");
-			driver = new FirefoxDriver();
-		}
-		else if(browserName.equals("IE")){
-			System.setProperty("webdriver.chrome.driver", "/Users/naveenkhunteta/Downloads/internetexplorerdriver");
-			driver = new InternetExplorerDriver();
-		}
-		
-		driver.get(url);
-		
-		driver.findElement(By.xpath(prop.getProperty("firstname_xpath"))).sendKeys(prop.getProperty("firstName"));
-		
-		driver.findElement(By.xpath(prop.getProperty("lastname_xpath"))).sendKeys(prop.getProperty("lastName"));
-
-		driver.findElement(By.xpath(prop.getProperty("city_xpath"))).sendKeys(prop.getProperty("city"));
-		
-
-	}
-
+        driver.get(url);
+        
+        // Using properties for locators
+        driver.findElement(By.xpath(prop.getProperty("firstname_xpath")))
+              .sendKeys(prop.getProperty("firstName"));
+    }
 }
