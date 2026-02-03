@@ -1,5 +1,6 @@
 package seleniumPractice;
 
+import java.io.File;
 import java.time.Duration;
 import java.util.concurrent.TimeUnit;
 
@@ -7,15 +8,26 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.Select;
 
 public class CalendarSelectTest {
 
 	public static void main(String[] args) throws InterruptedException {
 
-		System.setProperty("webdriver.chrome.driver", "/Users/naveenkhunteta/Downloads/chromedriver");
+		 WebDriver driver;
+		 String projectPath = System.getProperty("user.dir");
+	        String driverPath = projectPath + File.separator + "src" + File.separator + "test" + 
+	                           File.separator + "java" + File.separator + "resources" + 
+	                           File.separator + "driver" + File.separator + "chromedriver.exe";
 
-		WebDriver driver = new ChromeDriver(); // launch chrome
+	        System.setProperty("webdriver.chrome.driver", driverPath);
+
+	        ChromeOptions options = new ChromeOptions();
+	        options.addArguments("--start-maximized");
+	        driver = new ChromeDriver(options);
+
+		 driver = new ChromeDriver(); // launch chrome
 
 		driver.manage().window().maximize(); // maximize window
 		driver.manage().deleteAllCookies(); // delete all the cookies
@@ -45,9 +57,9 @@ public class CalendarSelectTest {
 		Select select1 = new Select(driver.findElement(By.name("slctYear")));
 		select1.selectByVisibleText(year);
 		
-		//*[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[2]/td[1]
-		//*[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[2]/td[2]	
-		//*[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[2]/td[6]
+		// *[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[2]/td[1]
+		// *[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[2]/td[2]	
+		// *[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[2]/td[6]
 		
 		String beforeXpath = "//*[@id='crmcalendar']/table/tbody/tr[2]/td/table/tbody/tr[";
 		String afterXpath = "]/td[";
