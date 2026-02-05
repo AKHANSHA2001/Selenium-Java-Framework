@@ -42,7 +42,7 @@ public class AlertPopUpHandle {
 			System.out.println("correct alert messg");
 		}
 		else{
-			System.out.println("in-correct alert messg");
+			System.out.println("in-correct alert messAgE");
 		}
 		
 		alert.accept(); //click on OK btn
